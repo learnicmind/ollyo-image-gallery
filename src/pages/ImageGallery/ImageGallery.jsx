@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Transition } from '@headlessui/react';
-// import { BsCardImage } from 'react-icons/bs';
 
 const ImageGallery = () => {
-    
+
     const [images, setImages] = useState([]);
     const [selectedImages, setSelectedImages] = useState([]);
 
@@ -56,7 +55,13 @@ const ImageGallery = () => {
 
     return (
         <div className="container mx-auto p-4 bg-slate-50">
+
+            {selectedImages.length === 0 && images.length > 0 && (
+                <h2 className='p-2 font-bold text-xl'>Gallery</h2>
+            )}
+            
             <div className='flex items-center justify-between'>
+
                 {/* conditional rendering for selected images */}
                 {selectedImages.length > 0 && (
                     <div className="mt-4 flex items-center">
@@ -67,12 +72,12 @@ const ImageGallery = () => {
                                 </span> <span className='font-bold'>Files selected</span>
                             </p>
                         </div>
+
                         {/* Button to delete selected images */}
                         <div className='md:ml-[1000px] ml-10'>
                             <p
                                 className="px-4 py-2 text-red-500 rounded mt-2 cursor-pointer font-bold"
                                 onClick={handleDeleteSelected}
-                                style={{ height: '100%', width: '100%' }}
                             >
                                 Delete Files
                             </p>
@@ -83,7 +88,7 @@ const ImageGallery = () => {
 
             </div>
 
-            <hr/>
+            <hr />
 
             {/* grid for displaying images */}
             <div className="mt-4 grid grid-cols-5 gap-4">
@@ -95,6 +100,7 @@ const ImageGallery = () => {
                         onDragOver={handleDragOver}
                         style={{ position: 'relative' }}
                     >
+
                         {/* displaying image */}
                         <img
                             src={image}
@@ -108,6 +114,7 @@ const ImageGallery = () => {
                             onDragStart={(e) => handleDragStart(e, index)}
                             style={{ width: '100%', height: '100%' }}
                         />
+
                         {/* Transition for hover effect */}
                         <Transition
                             show={selectedImages.includes(image)}
@@ -129,6 +136,7 @@ const ImageGallery = () => {
                         </Transition>
                     </div>
                 ))}
+
                 {/* container for uploading images */}
                 <div
                     className="relative group col-span-1 row-span-1"
@@ -143,7 +151,6 @@ const ImageGallery = () => {
                             className="absolute w-full h-full opacity-0 cursor-pointer"
                         />
                         <div className="w-full cursor-pointer h-full border rounded-md border-gray-300 flex items-center justify-center relative md:text-xl">
-                            {/* <BsCardImage className='absolute hidden md:block md:top-20 h-6 w-6' /> */}
                             Upload Image
                         </div>
                     </label>
